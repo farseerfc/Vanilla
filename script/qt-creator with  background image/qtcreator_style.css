@@ -1,0 +1,11 @@
+QTextEdit,
+QPlainTextEdit{
+    
+  /** Debugger editor fix >>> */
+  font-family: "larabiefont";
+  font-size:12px !important;
+  /** <<<<<<<<<<<<<<<<<<<<<<< */  
+    
+  background-color:rgba(0,0,0,0);
+  background-image:url(path/to/background/image.jpg);
+}
