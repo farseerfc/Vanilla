@@ -1,0 +1,193 @@
+@cursor-bg:"<cursor-side-picture.png>";
+@editor-bg:"<editor-background.png>";
+
+// no darken for inactive pane in Seti skin
+atom-pane:not(.active){
+  opacity: 1;
+  atom-text-editor{
+    background-color:transparent;
+  }
+}
+
+// no horizontal pane splitter line
+atom-pane-container atom-pane-axis.horizontal > *{
+  border:none;
+}
+
+// global font stack
+atom-workspace{
+  font-family:"Source Han Sans SC","WenQuanYi Micro Hei",sans-serif;
+}
+
+// editor background picture
+.item-views>atom-text-editor{
+  background-image: url(@editor-bg);
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color:transparent !important;
+}
+
+// Misc...
+.item-views>atom-text-editor::shadow {
+  .wrap-guide{
+    opacity:0;
+  }
+  .punctuation.definition.comment{
+    background:transparent;
+    box-shadow:none;
+  }
+  .comment{
+    color:#aaa;
+    background:transparent;
+  }
+  .line>span{
+      background: rgba(0,0,0,0.82);
+  }
+  .line{
+    z-index: 9;
+    .meta.tag{
+      color:#bbb;
+    }
+  }
+  .line.cursor-line{
+    border-bottom:1px solid rgba(255, 17, 52, 1);
+    z-index: 10;
+    &>span{
+      border-bottom:1px solid rgba(255, 17, 52, 1);
+    }
+  }
+  .highlight.selection>.region{
+    z-index: 10;
+    border-left:3px solid rgba(255, 17, 52, 0.8);
+    border-right:3px solid rgba(255, 17, 52, 0.8);
+    background:rgba(255,255,255,0.3);
+  }
+  .highlight.bracket-matcher .region{
+    z-index: 11;
+    border-bottom:5px solid rgb(172,255,63);
+    border-top:1px solid rgb(172,255,63);
+    border-right:1px solid rgb(172,255,63);
+    border-left:1px solid rgb(172,255,63);
+  }
+  
+  // cursor styling
+  .cursors{
+    .cursor{
+      display: block;
+      color:transparent;
+      border-color:transparent;
+      background:#E32D46;
+      box-shadow: 0 0 3px #E32D46;
+      width:3px !important;
+      transition: all 0.2s ease;
+      overflow: visible;
+      &::after,
+      &::before{
+        position: absolute;
+        left: 10rem;
+        bottom: -2.2rem;
+        width: 10rem;
+        height:10rem;
+        display: block;
+        color:white;
+        content: "\200b";
+        background-image: url(@cursor-bg);
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition:all 1s ease;
+      }
+      &::before{
+        -webkit-animation: 1.3s cursor-pic-float alternate infinite ease-in-out;
+      }
+      &::after{
+        -webkit-animation: 1.3s alternate infinite ease-in-out cursor-pic-float,
+                             1s normal    infinite ease        cursor-pic-flash;
+      }
+    }
+    &.blink-off{
+      .cursor{
+        opacity: 1;
+        background: lighten(#E32D46, 15%);
+        box-shadow: 0 0 3px lighten(#E32D46, 10%);
+      }
+    }
+  }
+  
+  .scroll-view,
+   :host .scroll-view{
+     padding-left:0;
+     background:rgba(0,0,0,0.2);
+   }
+  .gutter{
+    background: rgba(0,0,0,0.8);
+    border:none;
+    .line-numbers{
+      background:transparent !important;
+    }
+    .line-number,
+    :host .gutter .line-number{
+      color: rgba(255, 255, 255, 1);
+
+      &.cursor-line{
+        position:relative;
+        background:#E32D46;
+        border-bottom:1px solid rgba(255, 17, 52, 1);
+      }
+   }
+   .line-number.git-line-modified{
+     border-left-color:#FFDC4E;
+     border-left-width:3px;
+   }
+   .line-number.git-line-added{
+     border-left-color:#82FF58;
+     border-left-width:3px;
+   }
+  }
+}
+
+// cursor related animation
+// just justify to fit the animation pic
+@-webkit-keyframes cursor-pic-float {
+  0%{
+    bottom:-2.2em;
+  }
+  100%{
+    bottom:-1.6rem;
+  }
+}
+
+@-webkit-keyframes cursor-pic-flash {
+  0% {
+    -webkit-transform:scale(1);
+    opacity:0.9;
+  }
+  100% {
+    -webkit-transform:scale(1.6);
+    opacity:0;
+  }
+}
+
+
+// Markdown Preview Chinese font fix
+.markdown-preview{
+  font-family: "文泉驿等宽微米黑" !important;
+  atom-text-editor::shadow{
+    font-family: "文泉驿等宽微米黑" !important;
+  }
+}
+
+// scrollbar styling
+.scrollbars-visible-always /deep/ ::-webkit-scrollbar-track,
+.scrollbars-visible-always /deep/ ::-webkit-scrollbar-corner{
+   background:none;
+ }
+ .scrollbars-visible-always /deep/ ::-webkit-scrollbar-thumb{
+  border-radius: 0px;
+  box-shadow:none;
+  background: rgba(0, 0, 0, 0.4);
+  &:hover{
+    background: rgba(243, 0, 32, 0.5);
+  }
+ }
