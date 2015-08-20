@@ -27,9 +27,13 @@ atom-workspace{
   background-attachment: scroll;
   background-color:transparent !important;
 }
-
 // Misc...
 .item-views>atom-text-editor::shadow {
+  .scroll-view,
+  &:host .scroll-view{
+    // prevent default semi-transparent black on background image.
+    background:transparent !important;
+   }
   .wrap-guide{
     opacity:0;
   }
@@ -70,7 +74,7 @@ atom-workspace{
     border-right:1px solid rgb(172,255,63);
     border-left:1px solid rgb(172,255,63);
   }
-  
+
   // cursor styling
   .cursors{
     .cursor{
@@ -114,7 +118,7 @@ atom-workspace{
       }
     }
   }
-  
+
   .scroll-view,
    :host .scroll-view{
      padding-left:0;
