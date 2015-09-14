@@ -1,7 +1,9 @@
 @cursor-bg:"<cursor-side-picture.png>";
 @editor-bg:"<editor-background.png>";
+@term2-bg:"<editor-background.png>";
 
 // no darken for inactive pane in Seti skin
+// https://atom.io/themes/seti-ui
 atom-pane:not(.active){
   opacity: 1;
   atom-text-editor{
@@ -16,16 +18,27 @@ atom-pane-container atom-pane-axis.horizontal > *{
 
 // global font stack
 atom-workspace{
-  font-family:"Source Han Sans SC","WenQuanYi Micro Hei",sans-serif;
+  font-family:"Source Han Sans SC Light","WenQuanYi Micro Hei","Symbolla",sans-serif;
 }
 
-// editor background picture
+// editor background image
 .item-views>atom-text-editor{
   background-image: url(@editor-bg);
   background-size:cover;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-color:transparent !important;
+}
+
+// Term2 background image
+// https://atom.io/packages/term2
+.item-views>.term2{
+  background-image: url(@term2-bg);
+  background-size:50%;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color:transparent;
 }
 // Misc...
 .item-views>atom-text-editor::shadow {
@@ -175,11 +188,19 @@ atom-workspace{
 
 
 // Markdown Preview Chinese font fix
-.markdown-preview{
+.markdown-preview,
+.markdown-preview[data-use-github-style],
+.markdown-preview tt,
+.markdown-preview[data-use-github-style] tt{
+  font-family: "文泉驿微米黑" !important;
+}
+.markdown-preview code,
+.markdown-preview[data-use-github-style] code,
+.markdown-preview atom-text-editor,
+.markdown-preview[data-use-github-style] atom-text-editor,
+.markdown-preview atom-text-editor::shadow,
+.markdown-preview[data-use-github-style] atom-text-editor::shadow{
   font-family: "文泉驿等宽微米黑" !important;
-  atom-text-editor::shadow{
-    font-family: "文泉驿等宽微米黑" !important;
-  }
 }
 
 // scrollbar styling
