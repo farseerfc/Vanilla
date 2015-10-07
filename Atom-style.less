@@ -1,6 +1,32 @@
-@cursor-bg:"<cursor-side-picture.png>";
-@editor-bg:"<editor-background.png>";
-@term2-bg:"<editor-background.png>";
+// modify these rules to fit your picture :)
+#cursor-bg{
+  background-image:url("<cursor-side-picture.png>");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#editor-bg{
+  background-image:url("<editor-background.png>");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color:transparent;
+}
+#window-bg{
+  background-image:url("<window-background.png>");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color:transparent;
+}
+#term2-bg{
+  background-image:url("<term2-background.png>");
+  background-size:50%;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color:rgba(0,0,0,0.78);
+}
 
 // no darken for inactive pane in Seti skin
 // https://atom.io/themes/seti-ui
@@ -18,27 +44,81 @@ atom-pane-container atom-pane-axis.horizontal > *{
 
 // global font stack
 atom-workspace{
-  font-family:"Source Han Sans SC Light","WenQuanYi Micro Hei","Symbolla",sans-serif;
+  font-family:"Source Han Sans SC Light","文泉驿等宽微米黑","Symbolla",sans-serif;
+}
+
+:root>body>atom-workspace{
+  #window-bg();
+}
+
+atom-pane-container atom-pane,
+.tree-view{
+  background: transparent !important;
+  border:none;
+}
+
+tabs-bar, .tab-bar{
+  height:30px;
+  padding: 0 5px 0 5px;
+}
+
+tabs-bar tabs-tab,
+.tab-bar tabs-tab,
+tabs-bar .tab,
+.tab-bar .tab{
+  margin-left:0;
+}
+
+tabs-bar tabs-tab:before,
+.tab-bar tabs-tab:before,
+tabs-bar .tab:before,
+.tab-bar .tab:before{
+  display:none;
+}
+
+tabs-bar tabs-tab,
+.tab-bar tabs-tab,
+tabs-bar .tab,
+.tab-bar .tab,
+tabs-bar tabs-tab.active,
+.tab-bar tabs-tab.active,
+tabs-bar .tab.active,
+.tab-bar .tab.active,
+tabs-bar tabs-tab.active:before,
+.tab-bar tabs-tab.active:before,
+tabs-bar .tab.active:before,
+.tab-bar .tab.active:before{
+  height:30px;
+  line-height: 30px;
+  background:transparent;
+}
+
+tabs-bar, .tab-bar,
+.list-inline tabs-bar.inset-panel, .list-inline.tab-bar.inset-panel,
+atom-panel.top, atom-panel.bottom, atom-panel.left, atom-panel.right,
+atom-pane-container atom-pane-axis.vertical > atom-pane-resize-handle{
+  background:rgba(0,0,0,0.78);
+  border:none;
 }
 
 // editor background image
 .item-views>atom-text-editor{
-  background-image: url(@editor-bg);
-  background-size:cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-color:transparent !important;
+  #editor-bg();
 }
 
+.tree-view-resizer.tool-panel{
+  background:transparent;
+}
+
+.focusable-panel,
+.focusable-panel:focus,
+.tree-view{
+  background:transparent;
+}
 // Term2 background image
 // https://atom.io/packages/term2
 .item-views>.term2{
-  background-image: url(@term2-bg);
-  background-size:50%;
-  background-position: right bottom;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-color:transparent;
+  #term2-bg();
 }
 // Misc...
 .item-views>atom-text-editor::shadow {
@@ -109,18 +189,15 @@ atom-workspace{
         display: block;
         color:white;
         content: "\200b";
-        background-image: url(@cursor-bg);
-        background-position: center center;
-        background-size: contain;
-        background-repeat: no-repeat;
+        #cursor-bg();
         transition:all 1s ease;
       }
       &::before{
-        -webkit-animation: 1.3s cursor-pic-float alternate infinite ease-in-out;
+        animation: 1.3s cursor-pic-float alternate infinite ease-in-out;
       }
       &::after{
-        -webkit-animation: 1.3s alternate infinite ease-in-out cursor-pic-float,
-                             1s normal    infinite ease        cursor-pic-flash;
+        animation: 1.3s alternate infinite ease-in-out cursor-pic-float,
+                     1s normal    infinite ease        cursor-pic-flash;
       }
     }
     &.blink-off{
@@ -138,7 +215,7 @@ atom-workspace{
      background:rgba(0,0,0,0.2);
    }
   .gutter{
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.57);
     border:none;
     .line-numbers{
       background:transparent !important;
@@ -166,7 +243,7 @@ atom-workspace{
 
 // cursor related animation
 // just justify to fit the animation pic
-@-webkit-keyframes cursor-pic-float {
+@keyframes cursor-pic-float {
   0%{
     bottom:-2.2em;
   }
@@ -175,13 +252,13 @@ atom-workspace{
   }
 }
 
-@-webkit-keyframes cursor-pic-flash {
+@keyframes cursor-pic-flash {
   0% {
-    -webkit-transform:scale(1);
+    transform:scale(1);
     opacity:0.9;
   }
   100% {
-    -webkit-transform:scale(1.6);
+    transform:scale(1.6);
     opacity:0;
   }
 }
@@ -192,7 +269,7 @@ atom-workspace{
 .markdown-preview[data-use-github-style],
 .markdown-preview tt,
 .markdown-preview[data-use-github-style] tt{
-  font-family: "文泉驿微米黑" !important;
+  font-family: "Source Han Sans SC Light","文泉驿微米黑","Symbolla",sans-serif !important;
 }
 .markdown-preview code,
 .markdown-preview[data-use-github-style] code,
@@ -200,7 +277,7 @@ atom-workspace{
 .markdown-preview[data-use-github-style] atom-text-editor,
 .markdown-preview atom-text-editor::shadow,
 .markdown-preview[data-use-github-style] atom-text-editor::shadow{
-  font-family: "文泉驿等宽微米黑" !important;
+  font-family: "Source Han Sans SC Light","文泉驿等宽微米黑","Symbolla",sans-serif !important;
 }
 
 // scrollbar styling
