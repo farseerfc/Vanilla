@@ -1,3 +1,8 @@
+// modify these rules to fit your system fonts
+@global-font:"Source Han Sans SC Light","文泉驿等宽微米黑","Symbolla",sans-serif;
+@markdown-preview-general-font:"Source Han Sans SC Light","文泉驿等宽微米黑","Symbolla",sans-serif;
+@markdown-preview-code-font:"Droid Sans Mono", "文泉驿等宽微米黑","Symbolla", monospace;
+
 // modify these rules to fit your picture :)
 #cursor-bg{
   background-image:url("<cursor-side-picture.png>");
@@ -44,7 +49,7 @@ atom-pane-container atom-pane-axis.horizontal > *{
 
 // global font stack
 atom-workspace{
-  font-family:"Source Han Sans SC Light","文泉驿等宽微米黑","Symbolla",sans-serif;
+  font-family: @global-font;
 }
 
 :root>body>atom-workspace{
@@ -269,7 +274,7 @@ atom-pane-container atom-pane-axis.vertical > atom-pane-resize-handle{
 .markdown-preview[data-use-github-style],
 .markdown-preview tt,
 .markdown-preview[data-use-github-style] tt{
-  font-family: "Source Han Sans SC Light","文泉驿微米黑","Symbolla",sans-serif !important;
+  font-family: @markdown-preview-general-font !important;
   background: rgba(255,255,255,0.6);
 }
 .markdown-preview code,
@@ -278,7 +283,7 @@ atom-pane-container atom-pane-axis.vertical > atom-pane-resize-handle{
 .markdown-preview[data-use-github-style] atom-text-editor,
 .markdown-preview atom-text-editor::shadow,
 .markdown-preview[data-use-github-style] atom-text-editor::shadow{
-  font-family: "Source Han Sans SC Light","文泉驿等宽微米黑","Symbolla",sans-serif !important;
+  font-family: @markdown-preview-code-font !important;
 }
 
 // scrollbar styling
