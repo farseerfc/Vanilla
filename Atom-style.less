@@ -54,6 +54,11 @@ atom-workspace{
 
 :root>body>atom-workspace{
   #window-bg();
+
+  // remove ternjs blank div in the bottom of window.
+  atom-ternjs-type {
+    display: none;
+  }
 }
 
 atom-pane-container atom-pane,
@@ -272,6 +277,31 @@ atom-pane-container atom-pane-axis.vertical > atom-pane-resize-handle{
   }
 }
 
+// Linter bubble style
+
+#linter-inline {
+  color: #eee;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 0px;
+  &::before {
+    border-color: transparent transparent rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6);
+  }
+}
+
+.badge {
+  color: #fff;
+  // text-shadow: 0 0 1px black;
+  background: rgba(0,0,0, 0.5);
+}
+
+.badge.badge-flexible {
+  border-radius: 0;
+}
+
+atom-text-editor::shadow .linter-highlight.error:not(.line-number),
+.linter-highlight.error:not(.line-number) {
+  background-color: rgba(248, 63, 97, 0.6);
+}
 
 // Markdown Preview Chinese font fix
 .markdown-preview,
