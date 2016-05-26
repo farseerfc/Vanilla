@@ -33,6 +33,7 @@
   background-color:rgba(0,0,0,0.78);
 }
 
+
 // no darken for inactive pane in Seti skin
 // https://atom.io/themes/seti-ui
 atom-pane:not(.active){
@@ -50,6 +51,9 @@ atom-pane-container atom-pane-axis.horizontal > *{
 // global font stack
 atom-workspace{
   font-family:@global-font;
+
+  // fix weird gap
+  margin-left: -1px;
 }
 
 :root>body>atom-workspace{
@@ -61,58 +65,53 @@ atom-workspace{
   }
 }
 
-atom-pane-container atom-pane,
-.tree-view{
-  background: transparent !important;
-  border:none;
+atom-panel-container.left,
+atom-panel-container.right {
+  background: rgba(0,0,0,0.55);
+  border: none;
+  .entries.list-tree .directory.entry.list-nested-item,
+  .entries.list-tree .file.entry.list-item {
+    &.status-ignored {
+      color: #111;
+    }
+    &.selected::before {
+      background: rgba(255, 17, 52, 0.5);
+    }
+  }
+}
+
+atom-panel-container .project-root > .header {
+  background: rgba(0,0,0,0.5);
+  &:hover {
+    background: rgba(0,0,0,0.4);
+  }
 }
 
 .tree-view-scroller{
   background: transparent !important;
 }
 
-tabs-bar, .tab-bar{
-  height:30px;
-  padding: 0 5px 0 5px;
+atom-workspace-axis.vertical .tab-bar .tab {
+  background: transparent;
+  border-right: none;
 }
 
-tabs-bar tabs-tab,
-.tab-bar tabs-tab,
-tabs-bar .tab,
-.tab-bar .tab{
-  margin-left:0;
-}
-
-tabs-bar tabs-tab:before,
-.tab-bar tabs-tab:before,
-tabs-bar .tab:before,
-.tab-bar .tab:before{
-  display:none;
-}
-
-tabs-bar tabs-tab,
-.tab-bar tabs-tab,
-tabs-bar .tab,
-.tab-bar .tab,
-tabs-bar tabs-tab.active,
-.tab-bar tabs-tab.active,
-tabs-bar .tab.active,
-.tab-bar .tab.active,
-tabs-bar tabs-tab.active:before,
-.tab-bar tabs-tab.active:before,
-tabs-bar .tab.active:before,
-.tab-bar .tab.active:before{
-  height:30px;
-  line-height: 30px;
-  background:transparent;
+atom-workspace-axis.vertical .tab-bar .tab.active {
+  background: rgba(17, 18, 19, 0.3);
+  border-right: none;
 }
 
 tabs-bar, .tab-bar,
-.list-inline tabs-bar.inset-panel, .list-inline.tab-bar.inset-panel,
-atom-panel.top, atom-panel.bottom, atom-panel.left, atom-panel.right,
+.list-inline tabs-bar.inset-panel,
+.list-inline.tab-bar.inset-panel,
 atom-pane-container atom-pane-axis.vertical > atom-pane-resize-handle{
   background:rgba(0,0,0,0.78);
   border:none;
+}
+
+atom-workspace atom-panel.bottom:last-child {
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
 }
 
 // editor background image
@@ -304,33 +303,37 @@ atom-text-editor::shadow .linter-highlight.error:not(.line-number),
 }
 
 // Markdown Preview Chinese font fix
+// also rST-preview-pandoc styling
 .markdown-preview,
 .markdown-preview[data-use-github-style],
-.markdown-preview tt,
-.markdown-preview[data-use-github-style] tt{
+.rst-preview-pandoc {
   font-family: @markdown-preview-general-font !important;
+  color: #111;
   background: rgba(255,255,255,0.6);
-}
-.markdown-preview code,
-.markdown-preview[data-use-github-style] code,
-.markdown-preview atom-text-editor,
-.markdown-preview[data-use-github-style] atom-text-editor,
-.markdown-preview atom-text-editor::shadow,
-.markdown-preview[data-use-github-style] atom-text-editor::shadow{
-  font-family: @markdown-preview-code-font !important;
+
+  tt {
+    font-family: @markdown-preview-general-font !important;
+    background: rgba(255,255,255,0.6);
+  }
+
+  code,
+  atom-text-editor,
+  atom-text-editor::shadow {
+    font-family: @markdown-preview-code-font !important;
+  }
+
+  &>atom-text-editor {
+    background: rgb(30, 30, 30);
+  }
 }
 
-.markdown-preview>atom-text-editor,
-.markdown-preview[data-use-github-style]>atom-text-editor{
-  background: rgb(30, 30, 30);
-}
 
 // scrollbar styling
 .scrollbars-visible-always /deep/ ::-webkit-scrollbar-track,
 .scrollbars-visible-always /deep/ ::-webkit-scrollbar-corner{
    background:none;
- }
- .scrollbars-visible-always /deep/ ::-webkit-scrollbar-thumb{
+}
+.scrollbars-visible-always /deep/ ::-webkit-scrollbar-thumb{
   border-radius: 0px;
   box-shadow:none;
   background: rgba(0, 0, 0, 0.4);
